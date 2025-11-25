@@ -9,15 +9,43 @@ services:
       - PGID=20
       - TZ=America/Chicago
     volumes:
-      # Fresh config
       - ./calibre-config/config:/config
 
-      # Libraries (NOTE THE QUOTES)
+      # Libraries
       - "./calibre-libraries/Books Library:/books"
       - "./calibre-libraries/Manga Library:/manga"
 
+    # Expose only needed ports (Caddy will proxy the public side)
     ports:
-      - "8080:8080"  # main UI
-      - "8082:8081"  # content server (for Caddy)
+      - "8080:8080"     # Calibre GUI
+      - "8082:8081"     # Content server (Caddy reverse-proxy target)
 
     restart: unless-stopped
+
+  caddy:
+    image: caddy:latest
+    container_name: caddy
+    restart: unless-stopped
+
+    # Caddy must bind to ports 80 + 443 on the host
+    ports:
+      - "80:80"
+      - "443:443"
+
+    volumes:
+      # Your Caddyfile
+      - ./caddy/Caddyfile:/etc/caddy/Caddyfile
+
+      # Static assets (custom favicon, etc.)
+      - ./caddy/site:/srv
+
+      # Caddy internal storage (certs, etc.)
+      - caddy_data:/data
+      - caddy_config:/config
+
+    depends_on:
+      - calibre
+
+volumes:
+  caddy_data:
+  caddy_config:
