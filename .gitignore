@@ -1,0 +1,24 @@
+# ---- Calibre libraries (NEVER commit books) ----
+calibre-libraries/
+!calibre-libraries/.gitkeep
+
+# ---- Calibre config (TLS keys, user data, plugins) ----
+calibre-config/
+!calibre-config/.gitkeep
+
+# ---- Docker artifacts ----
+*.pid
+*.log
+*.tmp
+
+# ---- Python cache ----
+__pycache__/
+*.pyc
+
+# ---- macOS junk ----
+.DS_Store
+
+# ---- Editor files ----
+*.swp
+*.swo
+
