@@ -2,6 +2,7 @@ import os
 import zipfile
 import shutil
 import subprocess  # for stopping/starting Docker container
+from pathlib import Path
 
 # === CONFIG (MAC) ===
 
@@ -11,7 +12,9 @@ import subprocess  # for stopping/starting Docker container
 REPO_ROOT = Path(__file__).resolve().parents[1]
 
 # Folder on your Mac where the backup zips + state files are synced
-BACKUP_DIR = REPO_ROOT / "calibrebackups"
+HOME = Path.home()
+BACKUP_DIR = HOME / "calibrebackups"
+
 
 LIBRARIES = {
     "books": REPO_ROOT / "calibre-libraries" / "Books Library",
