@@ -84,19 +84,27 @@ docker compose down
 docker compose up -d
 ```
 
+In Initial Setup:
+
+- You will have to find the books mount that we set up in the docker file. You do not want to set up /config/Calibre Library. Click change then search for /books. It should pop up:
+<img width="628" height="569" alt="Screenshot 2025-11-25 at 11 47 32 AM" src="https://github.com/user-attachments/assets/9c5a7ab8-fdf4-4599-a729-7de36d4bd845" />
+
 In the Calibre UI:
 
 - Set the library path to `/books`
 - Add `/manga` via *Library → Switch/Create Library*
+- You will have to the same steps as we did in startup to find the library correctly
+- You will also want to change some settings for the content server. Like requiring users, and you will most definitely need to check "Run server automatically when calibre starts".
 
 ---
 
 ## 🌐 Reverse Proxy (Caddy)
 
 The `caddy/Caddyfile` routes traffic to the Calibre content server. If you want to host this publicly to the internet (at your own risk), this is how it would do it. I set up the /library subdomain here and in the calibre prefrences:
+<img width="581" height="80" alt="Screenshot 2025-11-25 at 12 37 31 PM" src="https://github.com/user-attachments/assets/da4e9e69-0186-4685-ac89-97798a9d0932" />
 
 ```caddy
-yourdomain.com {
+replacewithyourdomain.com {
     tls internal
     @calibre path /library*
     reverse_proxy @calibre 127.0.0.1:8082
@@ -135,7 +143,7 @@ You can adapt it to automate:
 
 ---
 
-## 🧪 Useful Commands
+## Useful Commands
 
 Check what the container can see:
 
@@ -148,13 +156,6 @@ Tail logs:
 
 ```bash
 docker logs -f calibre
-```
-
-Rebuild config from scratch:
-
-```bash
-rm -rf calibre-config
-mkdir -p calibre-config/config
 ```
 
 ---
