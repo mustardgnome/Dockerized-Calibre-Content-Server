@@ -1,0 +1,23 @@
+version: "3.8"
+
+services:
+  calibre:
+    image: lscr.io/linuxserver/calibre:latest
+    container_name: calibre
+    environment:
+      - PUID=501
+      - PGID=20
+      - TZ=America/Chicago
+    volumes:
+      # Fresh config
+      - ./calibre-config/config:/config
+
+      # Libraries (NOTE THE QUOTES)
+      - "./calibre-libraries/Books Library:/books"
+      - "./calibre-libraries/Manga Library:/manga"
+
+    ports:
+      - "8080:8080"  # main UI
+      - "8082:8081"  # content server (for Caddy)
+
+    restart: unless-stopped
