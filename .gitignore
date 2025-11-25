@@ -1,24 +1,26 @@
-# ---- Calibre libraries (NEVER commit books) ----
-calibre-libraries/
-!calibre-libraries/.gitkeep
+# --- Calibre libraries ---
+# Ignore everything inside the library folders
+calibre-libraries/**
 
-# ---- Calibre config (TLS keys, user data, plugins) ----
-calibre-config/
+# But DO NOT ignore the top-level folder itself
+!calibre-libraries/
+
+# But DO NOT ignore the subfolders (so they show up)
+!calibre-libraries/Books Library/
+!calibre-libraries/Manga Library/
+
+# But ignore everything inside those subfolders except .gitkeep
+calibre-libraries/Books Library/**
+calibre-libraries/Manga Library/**
+
+# Allow .gitkeep files
+!calibre-libraries/Books Library/.gitkeep
+!calibre-libraries/Manga Library/.gitkeep
+
+# --- Calibre config ---
+calibre-config/**
+!calibre-config/
 !calibre-config/.gitkeep
 
-# ---- Docker artifacts ----
-*.pid
-*.log
-*.tmp
-
-# ---- Python cache ----
-__pycache__/
-*.pyc
-
-# ---- macOS junk ----
 .DS_Store
-
-# ---- Editor files ----
-*.swp
-*.swo
-
+**/.DS_Store
