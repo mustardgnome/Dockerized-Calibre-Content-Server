@@ -1,19 +1,28 @@
+# macOS junk
+.DS_Store
+**/.DS_Store
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Docker / logs / temp
+*.pid
+*.log
+*.tmp
+
 # --- Calibre libraries ---
-# Ignore everything inside the library folders
+# Ignore everything by default
 calibre-libraries/**
-
-# But DO NOT ignore the top-level folder itself
+# But keep the top-level folder
 !calibre-libraries/
-
-# But DO NOT ignore the subfolders (so they show up)
+# Keep the subfolders so they show up in the repo
 !calibre-libraries/Books Library/
 !calibre-libraries/Manga Library/
-
-# But ignore everything inside those subfolders except .gitkeep
+# Ignore everything inside those subfolders...
 calibre-libraries/Books Library/**
 calibre-libraries/Manga Library/**
-
-# Allow .gitkeep files
+# ...except .gitkeep placeholders
 !calibre-libraries/Books Library/.gitkeep
 !calibre-libraries/Manga Library/.gitkeep
 
@@ -21,6 +30,3 @@ calibre-libraries/Manga Library/**
 calibre-config/**
 !calibre-config/
 !calibre-config/.gitkeep
-
-.DS_Store
-**/.DS_Store
