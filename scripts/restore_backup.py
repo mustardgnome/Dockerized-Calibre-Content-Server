@@ -6,15 +6,17 @@ import subprocess  # for stopping/starting Docker container
 # === CONFIG (MAC) ===
 
 # Folder on your Mac where the backup zips + state files are synced
-BACKUP_DIR = r"/Users/colejones/calibrebackups"
+BACKUP_DIR = r"/Users/user/calibrebackups"
 
 # Local Calibre libraries on this Mac, keyed by the same prefixes
 # used on your Windows backup script ("books", "manga", etc.).
 # These match what you're mounting into Docker at /books
+REPO_ROOT = Path(__file__).resolve().parent.parent
 LIBRARIES = {
-    "books": r"/Users/colejones/calibre-libraries/Books Library",
-    "manga": r"/Users/colejones/calibre-libraries/Manga Library",
+    "books": os.path.join(REPO_ROOT, "calibre-libraries", "Books Library"),
+    "manga": os.path.join(REPO_ROOT, "calibre-libraries", "Manga Library"),
 }
+
 
 # Name suffix for the *local* "last restored state" files on this Mac.
 LOCAL_STATE_SUFFIX = "_library_last_restored_state.txt"
