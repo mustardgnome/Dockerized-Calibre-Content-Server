@@ -1,7 +1,6 @@
 yourdomain.com {
-    # Proxy all requests to the Calibre content server
-    tls internal
+    encode gzip
+
     @calibre path /library*
     reverse_proxy @calibre calibre:8081
 }
-
